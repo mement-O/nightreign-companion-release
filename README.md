@@ -1,14 +1,21 @@
 # NIGHTREIGN Companion
 
+## ダウンロード
+
+[**Windows x64版 v1.1.0 をダウンロード**](https://github.com/mement-O/nightreign-companion-release/releases/download/v1.1.0/NightreignCompanion-1.1.0-windows-x64.zip)
+
+通常の利用には、上記のZIPファイルのみダウンロードしてください。
+
+その他のReleaseアセットは自動更新・整合性確認用、またはGitHubが自動生成するファイルです。手動でダウンロードする必要はありません。
+
 ELDEN RING NIGHTREIGNのプレイ画面を監視し、ゲーム中の出来事に合わせて音声と字幕で反応する、非公式のWindows向けコンパニオンです。ゲーム本体は別途必要です。
 
 ![ホーム画面の例。VOICEVOXの春日部つむぎを選択した状態](images/home-voicevox.png)
 
 ## はじめ方
 
-1. 配布リポジトリの [Releases](https://github.com/mement-O/nightreign-companion-release/releases) から、Windows x64用の `NightreignCompanion-1.1.0-windows-x64.zip` をダウンロードします。
-2. ZIPをすべて展開し、展開先の一番上にある `NightreignCompanion.exe` を開きます。
-3. 初回起動時のMicrosoftランタイム利用条件に同意すると、Windows標準音声とローカル定型文で始められます。Python・インストーラー・APIキーは不要です。
+1. ZIPをすべて展開し、展開先の一番上にある `NightreignCompanion.exe` を開きます。
+2. 初回起動時のMicrosoftランタイム利用条件に同意すると、Windows標準音声とローカル定型文で始められます。Python・インストーラー・APIキーは不要です。
 
 Windows 10/11 x64のシステムUCRTと、同梱のMicrosoft Visual C++ v14ランタイムを使用します。ランタイムの権利表記は同梱のライセンス文書をご覧ください。 [Microsoft Visual C++ Runtime 2026の利用条件](https://visualstudio.microsoft.com/license-terms/vs2026-ga-visualcpp-v14-redist-runtime/)
 
