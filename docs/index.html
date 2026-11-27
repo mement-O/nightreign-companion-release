@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NIGHTREIGN Companion 利用マニュアル</title>
+<style>
+:root{color-scheme:dark}body{margin:0;background:#10121f;color:#eef0ff;font:16px/1.7 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:2rem 1rem 4rem}h1,h2{line-height:1.3}section{margin-top:2.5rem}a{color:#c6c0ff}nav,aside{background:#1b2033;padding:1rem;border:1px solid #4b5275;border-radius:.5rem}nav a{display:inline-block;margin:.15rem .8rem .15rem 0}img{display:block;max-width:100%;height:auto;border:1px solid #4b5275;border-radius:.4rem}figure{margin:1rem 0}figcaption{color:#c4c7dd;font-size:.9rem}code{overflow-wrap:anywhere}dt{font-weight:700;margin-top:.8rem}dd{margin-left:0}
+</style>
+<style>
+.table-scroll{overflow-x:auto;margin:1rem 0}table{width:100%;border-collapse:collapse}th,td{padding:.55rem .7rem;border:1px solid #4b5275;text-align:left;vertical-align:top}thead{background:#1b2033}th[scope=row]{min-width:9rem}pre{overflow:auto;padding:.8rem;background:#1b2033;border-radius:.4rem}.examples{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}.examples figure{margin:0}
+</style>
+</head>
+<body><main>
+<h1>NIGHTREIGN Companion 利用マニュアル</h1>
+<p>ELDEN RING NIGHTREIGNの画面を監視し、ゲーム中の出来事や探索中の雑談を音声と字幕で知らせる非公式のWindowsアプリです。</p>
+<nav aria-label="目次"><a href="#start">はじめる</a><a href="#voice">音声</a><a href="#voice-details">音声の詳細設定</a><a href="#engine">ENGINE単体</a><a href="#ai">文章生成</a><a href="#speech">発言設定</a><a href="#overlay">オーバーレイ設定</a><a href="#play">監視と記録</a><a href="#maintenance">バックアップと更新</a><a href="#help">困ったとき</a><a href="#credits">利用条件</a></nav>
+
+<section id="start"><h2>ダウンロードと初回起動</h2>
+<p>Windows 10/11 x64とゲーム本体が必要です。アプリ用のPythonやAPIキーは初期設定では不要です。</p>
+<ol><li><a href="https://github.com/mement-O/nightreign-companion-release/releases/latest">配布ページ</a>で、Windows x64版のダウンロード案内にあるZIPを取得します。</li><li>ZIPを右クリックして「すべて展開」し、展開先の一番上の <code>NightreignCompanion.exe</code> を開きます。</li><li>初回はMicrosoftランタイム利用条件を確認し、同意して進みます。Windows標準音声とローカル定型文で開始できます。</li></ol>
+<figure><img src="images/home.png" alt="コンパニオンのホーム画面"><figcaption>ホーム画面。ゲームの検出状況と監視の操作を確認できます。</figcaption></figure>
+</section>
+
+<section id="voice"><h2>音声を選ぶ</h2>
+<h3>Windows標準音声</h3><p>「音声設定」でWindows標準音声を選び、「① 話者」から日本語音声または自動選択を指定します。音量と話速を調整し、「試聴」で聞いてから「保存」します。</p>
+<figure><img src="images/windows-audio.png" alt="Windows標準音声を選んだ音声設定画面"></figure>
+<h3>VOICEVOX GUI版</h3>
+<ol><li>「VOICEVOX公式サイト」からWindows用の<a href="https://voicevox.hiroshiba.jp/">VOICEVOX本体</a>を入手してインストールします。迷ったときはCPU版から始めてください。</li><li>VOICEVOXを開き、エンジンが起動するまで待ちます。コンパニオンは付属エンジンを利用できます。</li><li>コンパニオンの音声設定でVOICEVOXを選び、「接続確認」を押します。通常の接続先は <code>http://127.0.0.1:50021</code>。VOICEVOXが別ポートを使う場合は実際の接続先を指定します。</li><li>「① 話者」からキャラクターを選び、「基本スタイル」で声色を決めます。「② 人格・話し方」は文章の口調です。音声と文章の口調は別々に設定できます。「試聴」して「保存」します。</li></ol>
+<figure><img src="images/voicevox-audio.png" alt="VOICEVOXを選択した音声設定画面と導入リンク"></figure>
+</section>
+
+<section id="voice-details"><h2>音声の詳細設定</h2>
+<nav aria-label="音声の詳細設定の章内目次"><a href="#voice-persona">人格プロファイル</a><a href="#voice-dictionary">ゲーム用語の読み辞書</a><a href="#voice-prosody">感情ごとの声の調整</a><a href="#voice-future">感情別スタイル</a></nav>
+<p>「音声設定」右側の「詳細設定」から開きます。字幕と立ち絵の調整は<a href="#overlay">オーバーレイ設定</a>をご覧ください。</p>
+<h3 id="voice-persona">人格プロファイル</h3>
+<p>発言の口調を登録する画面です。上部の一覧で人格を選ぶと設定を確認できます。標準人格は読み取り専用なので、「複製」でコピーを作り、名前を変えて「保存」します。</p>
+<figure><img src="images/voice-persona.png" alt="人格プロファイル。標準人格の欄と複製・保存・再読み込み・削除ボタン"></figure>
+<dl>
+<dt>名前・一人称</dt><dd>一覧で見分ける名前と、発言で自分を指す言葉を指定します。</dd>
+<dt>性格・距離感・感情表現</dt><dd>落ち着きや明るさ、プレイヤーへの接し方、感情の出し方を記述します。</dd>
+<dt>口調・語彙</dt><dd>丁寧さや文章の長さ、よく使う言葉の傾向などを記述します。</dd>
+<dt>語尾（読点区切り）・注意事項（読点区切り）</dt><dd>好む語尾と避けたい表現を、それぞれ「、」で区切って入力します。</dd>
+<dt>カスタム指示</dt><dd>ほかの欄に収まらない話し方の指示です。たとえば「危険時は短く、落ち着いた語調で」と入力できます。</dd>
+</dl>
+<p>名前・一人称・性格・口調は必須です。たとえば「静かな案内役」、一人称「私」、性格「穏やか」、口調「短い丁寧語」として保存できます。「再読み込み」は保存済みの内容を読み直します。「削除」はカスタム人格のみで、使用中なら先に別の人格を選んで保存してください。</p>
+<p>新しい人格を使うには、音声設定の「② 人格・話し方」で「カスタム設定」を選び、対象の人格を選んで音声設定も「保存」します。監視中でも音声の条件が同じなら、人格選択の変更は次回の発言生成から反映されます。話者・スタイルなど音声の条件も変えた場合は次回の監視開始からです。カスタム指示は主にAI生成に使われ、localの定型文を自由に書き換える機能ではありません。</p>
+<h3 id="voice-dictionary">ゲーム用語の読み辞書</h3>
+<p>VOICEVOXでの読み方を調整します。「新規」を押し、「表示語」に2文字以上の言葉、「読み（かな）」にひらがなまたはカタカナで読みを入れます。たとえば「聖杯瓶」→「せいはいびん」です。字幕や発言履歴の表記は元のままです。</p>
+<figure><img src="images/voice-dictionary.png" alt="ゲーム用語の読み辞書。表示語とかな、保存と補正前後の試聴操作"></figure>
+<p>下の試聴文にその用語を含め、「補正前を試聴」「補正後を試聴」で比べてから「保存」します。補正後の試聴は入力中の用語と読みを使います。既存の用語は上部の一覧から選んで編集・削除できます。「再読み込み」で未保存の編集を戻せます。保存後は次のVOICEVOX合成から使われます。Windows標準音声には適用されません。</p>
+<h3 id="voice-prosody">感情ごとの声の調整</h3>
+<p>「調整する感情」で「共通（個別指定がない感情）」か、通常・喜び・心配・高揚・安堵を選びます。保存した個別値、保存した共通値、標準の自動調整の順に使われます。各VOICEVOX話者・スタイルに共通する補正です。</p>
+<figure><img src="images/voice-prosody.png" alt="感情ごとの声の調整。感情の選択、速度・高さ・抑揚の入力と試聴"></figure>
+<div class="table-scroll"><table><thead><tr><th scope="col">設定</th><th scope="col">入力範囲・基準</th><th scope="col">効果</th></tr></thead><tbody>
+<tr><th scope="row">声の速さの倍率</th><td>0.5〜2、基準1</td><td>音声設定の話速に掛けます。1より小さいと遅くなります。</td></tr>
+<tr><th scope="row">声の高さの補正</th><td>−0.15〜0.15、基準0</td><td>負の値で低め、正の値で高めにします。</td></tr>
+<tr><th scope="row">抑揚の強さ</th><td>0〜2、基準1</td><td>小さくすると抑揚を抑え、大きくすると強めます。</td></tr>
+</tbody></table></div>
+<p>たとえば「心配」で速さ0.95、高さ−0.02、抑揚0.9を入力し、「試聴（画面の未保存値を使用）」で聞けます。VOICEVOXに接続した状態で試聴してください。「この感情の設定を保存」で次の合成から使われます。「変更を元に戻す」は未保存の編集を戻し、「この感情の上書きを解除」は保存済みの上書きを削除します。上書き未保存時の表示値は編集用の基準で、イベント別の自動調整値とは異なる場合があります。</p>
+<h3 id="voice-future">感情別スタイル（将来対応）</h3>
+<p>現在は利用できません。チェックを入れると予定機能の説明が表示されます。発言ごとにVOICEVOXの基本スタイルを切り替える機能は未実装です。「感情ごとの声の調整」や、立ち絵の「感情別に切り替える」は現在使える別の機能です。</p>
+<figure><img src="images/voice-detail-options.png" alt="詳細設定で感情別スタイルの将来対応の説明を開いた画面"></figure>
+</section>
+
+<section id="engine"><h2>ENGINE単体を使う</h2>
+<p>上級者向けです。<a href="https://github.com/VOICEVOX/voicevox_engine/releases">公式ENGINEの配布ページ</a>でWindows用の配布物を選び、全体を任意のフォルダーに展開します。CPU版は専用GPUを必要としません。NVIDIA GPU版は対応GPUとドライバーを用意できる場合に選び、起動できなければCPU版を試してください。</p>
+<ol><li>「音声設定」→「VOICEVOX」→「導入・起動設定」で、展開したENGINE単体の <code>run.exe</code> を指定します。NVIDIA GPU版を使う場合はチェックを入れ、「保存」します。</li><li>「エンジンを起動」を押します。指定ポートで接続済みのエンジンが使える場合は、そのまま接続します。</li><li>外部で起動する場合は、起動時に指定したポートをコンパニオンに入力し、「接続確認」を押します。</li></ol>
+<p>既定のVOICEVOX-ENGINEフォルダーにあるCPU版・NVIDIA版は自動検出を試みます。任意フォルダーに展開した場合は手動指定できます。GUI版の付属ENGINEはVOICEVOX本体から起動してください。本体から起動したエンジンの終了はVOICEVOX側で行います。</p>
+<figure><img src="images/voicevox-setup.png" alt="ENGINE単体の実行ファイルとGPU起動を指定する画面"></figure>
+</section>
+
+<section id="ai"><h2>OpenAI・Geminiとローカル定型文</h2>
+<p>ホームの「AI設定」で生成方式を選びます。初期値のlocalは端末内の定型文です。OpenAIやGeminiを選ぶ場合は、各サービスで取得した自分のAPIキーを対応する設定欄に入力し、接続確認と保存を行います。音声方式とは独立した設定で、利用料やデータの取り扱いは各提供元の条件に従います。キーを画像やログに写さないでください。</p>
+<ul><li><a href="https://platform.openai.com/api-keys">OpenAI PlatformでAPIキーを発行</a></li><li><a href="https://aistudio.google.com/app/apikey">Google AI StudioでGemini APIキーを発行</a></li></ul>
+<nav aria-label="文章生成の章内目次"><a href="#ai-provider">方式とモデル</a><a href="#ai-test">APIキーと接続テスト</a><a href="#ai-usage">使用量と料金</a></nav>
+<h3 id="ai-provider">文章生成方式とモデル</h3>
+<p>ホームの「AI設定」で「AI生成設定」を開きます。「文章生成方式」で選べるのは <code>local</code>、<code>openai</code>、<code>gemini</code> の3つです。<code>local</code> は端末内の定型文を使い、モデルやキーは入力不要です。OpenAI・Geminiでは観測したイベントに応じて文章を生成し、安全な場面では振り返りや雑談も候補になります。一部の緊急通知はAIを選んでいても定型文を使います。</p>
+<p>「OpenAIモデル」または「Geminiモデル」で候補を選ぶか、利用できるモデルIDを直接入力します。初期表示はOpenAIが <code>gpt-5-mini</code>、Geminiが <code>gemini-3.5-flash-lite</code> です。他のモデルを指定する場合は、登録したキーで使えることを接続テストで確かめます。</p>
+<div class="examples"><figure><img src="images/ai-settings.png" alt="AI生成設定でOpenAIを選択。モデル欄と空のAPIキー欄、接続テストと保存"><figcaption>OpenAIを選んだ画面。</figcaption></figure>
+<figure><img src="images/ai-settings-gemini.png" alt="AI生成設定でGeminiを選択。モデル欄と空のAPIキー欄、利用条件の案内"><figcaption>Geminiを選んだ画面。</figcaption></figure></div>
+<h3 id="ai-test">APIキー・接続テスト・保存</h3>
+<ol><li>選んだサービスのキーを「APIキー（登録・変更）」に入力します。空欄のまま操作すると、選んだサービスの登録済みキーを使います。</li><li>「接続テスト」を押します。実際にAPIへ接続するため、利用条件に応じて通信・使用量が発生します。このボタンだけでは設定は保存されません。</li><li>結果を確認して「保存」。文章生成方式とモデルの変更は次回の監視開始から反映されます。「キャンセル」は保存せず閉じます。</li></ol>
+<p>接続テストが失敗したら、キー、モデルID、ネットワーク、提供元の利用制限や課金設定を確認します。テスト失敗だけで設定がlocalに切り替わることはありません。監視中にAI生成が失敗した場合は、定型文のある通知では定型文に戻る場合があり、AIが必要な自発的発言は見送ります。クラウドを使わず続けるなら手動でlocalを選んで保存してください。</p>
+<h3 id="ai-usage">API使用量と料金</h3>
+<p>ホーム下部の「現在の構成・詳細情報」にある「API使用量」で、今回の監視中に記録したトークン数と、算定できた場合の概算額を確認できます。新しく監視を開始すると集計はリセットされます。表示に含まれない使用や料金未算定のモデルがあるため、実際の請求・上限は提供元の管理画面で確認してください。</p>
+<p>ChatGPTなどの月額契約と、コンパニオンがAPIキーで行うAPI利用の料金は別です。OpenAIの料金はAPI側のアカウントで確認します。Geminiも利用するAPIプロジェクトのモデル・無料枠・課金設定に従います。 <a href="https://help.openai.com/en/articles/9039756-managing-billing-for-chatgpt-and-the-api-platform">ChatGPTとOpenAI APIの請求</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing">Gemini APIの料金</a></p>
+</section>
+
+<section id="speech"><h2>発言設定</h2>
+<nav aria-label="発言設定の章内目次"><a href="#speech-events">イベント別の発言設定</a><a href="#speech-frequency">発言頻度</a><a href="#speech-timing">発言タイミング</a><a href="#speech-examples">設定例</a></nav>
+<p>戦闘や出撃の通知を選び、発言間隔を調整します。「保存」を押すと、次回の監視開始から反映されます。監視中に変更した場合は、いったん「停止」を押してから監視を開始し直してください。声の大きさや速さは「音声設定」で変えられます。</p>
+<figure><img src="images/speech-settings.png" alt="発言設定タブ。イベント別の発言設定、発言頻度、発言タイミングが上から並ぶ"><figcaption>初期設定で開いた「発言設定」タブ。</figcaption></figure>
+<h3 id="speech-events">イベント別の発言設定</h3>
+<p>各グループはオン・オフを選択でき、初期値は6グループともオンです。イベントはグループ単位で切り替えます。「追加の体力・聖杯瓶・ボスHP通知を有効にする」は初期値オフです。追加通知を聞くには、この項目と該当グループを両方オンにしてください。</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">画面の項目</th><th scope="col">主な発言</th></tr></thead><tbody>
+<tr><th scope="row">自分の体力・ダウン・復帰</th><td>自分のダウン・復帰など。追加通知をオンにすると、低HP、大きなHP減少、満タンへの回復も対象になります。</td></tr>
+<tr><th scope="row">味方の体力・ダウン・復帰</th><td>上下の味方のダウン・復帰、2人ともダウンしたときの通知。追加通知をオンにすると、味方の低HPも対象になります。</td></tr>
+<tr><th scope="row">ボスHP・撃破・勝敗</th><td>ボス戦開始、ゲージ全損・一部全損、確認できた最終勝利・敗北。追加通知をオンにするとHP半分・低HPも対象になります。ゲージ全損と最終勝利は別の通知です。</td></tr>
+<tr><th scope="row">出撃進行・日数変化</th><td>1日目・2日目の夜戦開始、2日目開始、3日目の待機部屋、最終ボス戦開始。途中から監視すると、日数を確定できない場合があります。</td></tr>
+<tr><th scope="row">アーツ使用可能</th><td>アーツが使用可能になったと確認できたときの通知。</td></tr>
+<tr><th scope="row">聖杯瓶の残数</th><td>残り1個・使い切りの通知。追加通知をオンにすると対象になります。</td></tr>
+</tbody></table></div>
+<h3 id="speech-frequency">発言頻度</h3>
+<p>「自動（発言頻度に合わせる）」の最小間隔は、下の表のとおりです。頻度は追加通知などを再び候補にできる間隔にも関係します。両方の発言タイミングを手動にした場合も、頻度の影響は残ります。</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">頻度</th><th scope="col">通常リアクション</th><th scope="col">自発的な会話</th><th scope="col">向いている遊び方</th></tr></thead><tbody>
+<tr><th scope="row">控えめ</th><td>45秒</td><td>180秒</td><td>ゲーム音や会話を中心に、通知を少なめにしたいとき。</td></tr>
+<tr><th scope="row">標準（初期値）</th><td>30秒</td><td>120秒</td><td>反応の間隔と静かさのバランスを取りたいとき。</td></tr>
+<tr><th scope="row">多め</th><td>18秒</td><td>80秒</td><td>戦闘や探索で声かけを聞く機会を増やしたいとき。</td></tr>
+</tbody></table></div>
+<h3 id="speech-timing">発言タイミング</h3>
+<dl>
+<dt>通常リアクション</dt><dd>普通のイベント反応の最小間隔です。「自動」が初期値で、標準では30秒。「秒数を指定」では10〜600秒の整数を入力できます。高優先度の緊急通知などには通常とは別の条件があります。</dd>
+<dt>自発的な会話</dt><dd>探索中の自発的な発言の間隔です。「自動」が初期値で、標準では120秒。「秒数を指定」では45〜600秒の整数を入力できます。安全な探索と認識できることや、優先する別の発言がないことも必要なので、一定周期で必ず発言する設定ではありません。</dd>
+<dt>戦闘後の振り返り</dt><dd>初期値オン。OpenAI・Gemini利用時、戦闘後の落ち着いた場面で、実際に観測した内容から振り返ります。直前に話した内容しかない場合などは見送ります。探索中の会話間隔とは別に判定します。</dd>
+<dt>探索中の自発的な発言</dt><dd>初期値オン。OpenAI・Gemini利用時、安全な探索中に雑談の候補を出します。戦闘やメニュー、画面の状況が不明なときは控えます。振り返りと自発的発言は、localではオンでも発生しません。</dd>
+</dl>
+<aside id="speech-examples"><strong>設定例</strong><ul>
+<li><strong>静かに遊ぶ</strong>　「控えめ」で追加通知、戦闘後の振り返り、探索中の自発的な発言をオフ。必要なイベントグループを残します。</li>
+<li><strong>バランス重視</strong>　「標準」と両方の「自動」を使い、必要に応じて追加通知をオン。AI利用時は振り返りと探索中の発言をオンにできます。</li>
+<li><strong>賑やかに遊ぶ</strong>　「多め」で追加通知をオン。AI利用時に探索中の自発的な発言をオンにして、さらに増やしたければ「自発的な会話」を手動で45秒にします。</li>
+</ul></aside>
+</section>
+
+<section id="overlay"><h2>オーバーレイ設定</h2>
+<nav aria-label="オーバーレイ設定の章内目次"><a href="#overlay-display">表示設定</a><a href="#overlay-portraits">キャラクター画像</a><a href="#overlay-size">表示位置・サイズ</a><a href="#overlay-library">画像ライブラリ</a><a href="#overlay-preview">プレビュー・保存</a></nav>
+<p>「音声設定」右側の「オーバーレイ」を開くと、「表示設定」と「キャラクター画像」の2タブが開きます。下部のプレビューで、保存前の見た目を確認できます。</p>
+<h3 id="overlay-display">表示設定</h3>
+<figure><img src="images/overlay-display.png" alt="オーバーレイの表示設定タブ。詳細設定を展開し、下にプレビューが表示された画面"></figure>
+<div class="table-scroll"><table><thead><tr><th scope="col">画面の項目</th><th scope="col">初期値と範囲</th><th scope="col">表示への影響</th></tr></thead><tbody>
+<tr><th scope="row">表示位置</th><td>右中央。右下、カスタムも選択可能</td><td>字幕と画像をまとめて配置します。カスタムでは横・縦位置の数値を使います。</td></tr>
+<tr><th scope="row">ゲーム画面に表示する</th><td>オフ</td><td>オンで、監視中の発話に合わせて表示します。設定画面のプレビューにはオフでも表示できます。</td></tr>
+<tr><th scope="row">キャプチャに含める</th><td>オフ</td><td>録画などに表示を含めたい場合にオンにします。取り込み結果はキャプチャ方式にも依存します。録画に映す場合はHUDを隠さない位置で確認してください。</td></tr>
+<tr><th scope="row">本文パネル幅 px（0で画面幅の30%）</th><td>880 px。0または180〜1100 px</td><td>細くすると字幕の折り返しが増えます。実際の幅は画面サイズと立ち絵の領域にも制約されます。</td></tr>
+<tr><th scope="row">アイコン基準サイズ px</th><td>104 px。48〜144 px</td><td>立ち絵の基準サイズです。実際の表示寸法は画面サイズや画像の倍率でも変わります。</td></tr>
+<tr><th scope="row">本文文字サイズ px</th><td>28 px。16〜48 px</td><td>字幕の大きさ。表示領域に収めるため調整されることがあります。</td></tr>
+<tr><th scope="row">背景不透明度 %</th><td>76%。0〜100%</td><td>字幕背景を薄くしたり濃くしたりします。文字と立ち絵は別の値で設定します。</td></tr>
+<tr><th scope="row">音声終了後の保持 秒</th><td>2.5秒。0〜15秒</td><td>再生が正常に終わってから字幕を残す時間です。</td></tr>
+<tr><th scope="row">最低表示 秒</th><td>4.5秒。0〜15秒</td><td>表示開始からの最低時間。通常は保持時間とこの時間の両方を満たして消えます。割り込み、取消、再生失敗、次の発話では早く消えたり切り替わったりします。</td></tr>
+<tr><th scope="row">カスタム横位置 %</th><td>100%。0〜100%</td><td>「カスタム」のとき、0%で左側、100%で右側に寄せます。</td></tr>
+<tr><th scope="row">カスタム縦位置 %</th><td>58%。0〜100%</td><td>「カスタム」のとき、0%で上側、100%で下側に寄せます。</td></tr>
+<tr><th scope="row">文字不透明度 %</th><td>100%。0〜100%</td><td>字幕の文字だけを薄くします。0%では文字が見えなくなります。</td></tr>
+<tr><th scope="row">アイコン不透明度 %</th><td>100%。0〜100%</td><td>立ち絵だけを薄くします。立ち絵を見せずに字幕を使う場合は0%にできます。</td></tr>
+</tbody></table></div>
+<p>カスタム位置と文字・アイコンの不透明度は「詳細設定」にあります。「表示設定を初期値に戻す」は編集中の表示値を戻します。「保存」で確定してください。</p>
+<h3 id="overlay-portraits">キャラクター画像</h3>
+<p>音声設定でVOICEVOXの話者を先に選んでください。画面上部の「対象話者」に選んだ話者が表示されます。画像の選択と補正は話者ごとに保存されます。未設定の話者に標準セットがあれば自動選択され、登録済みの設定があればそちらが優先されます。Windows標準音声では話者別の立ち絵は使われません。</p>
+<figure><img src="images/overlay-portraits.png" alt="キャラクター画像タブ。表示方式、感情別の割当と表示位置・サイズの補正がある画面"></figure>
+<div class="table-scroll"><table><thead><tr><th scope="col">表示方式</th><th scope="col">使い方</th></tr></thead><tbody>
+<tr><th scope="row">標準画像</th><td>VOICEVOXの話者画像を使います。未取得時は汎用表示になります。</td></tr>
+<tr><th scope="row">画像セット</th><td>「使用する画像・セット」で同梱の標準セットか追加したセットを選びます。</td></tr>
+<tr><th scope="row">カスタム画像（感情別）</th><td>登録した個別PNGを、通常・喜び・心配・高揚・安堵に割り当てます。</td></tr>
+<tr><th scope="row">固定画像</th><td>登録したPNGを選び、同じ画像を使います。</td></tr>
+</tbody></table></div>
+<p>「画像セット」と「カスタム画像（感情別）」では「感情別に切り替える」で切替を有効にできます。複数の表情を持つ標準セットの未設定時はオンです。保存済みの選択が優先され、オフなら通常画像を使います。感情画像が欠けている場合も通常画像へ戻ります。</p>
+<p>「感情別の割当」の表では「割当」と「実際に使用する画像」を確認できます。行または感情の一覧で対象を指定し、登録済みPNGを選んで「割り当てる」を押します。「割当解除」でその感情の割当を外し、「セットの元画像に戻す」でセットの元の表情に戻せます。</p>
+<h4 id="overlay-size">表示位置・サイズ</h4>
+<p>編集範囲の初期選択は「共通補正」です。全感情を同じ値にするときに使います。「選択感情の補正」は選んだ感情だけを調整します。共通補正を編集すると、同じセットの個別補正は共通値にそろいます。固定画像の補正はその画像全体に適用されます。</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">補正項目</th><th scope="col">範囲と基準値</th><th scope="col">変化</th></tr></thead><tbody>
+<tr><th scope="row">倍率 %</th><td>50〜200%、通常100%</td><td>画像を拡大・縮小します。セットの <code>base_scale</code> があれば初期倍率に反映します。</td></tr>
+<tr><th scope="row">横位置 %</th><td>−30〜30%、0%</td><td>画像だけを左右にずらします。実表示は画面端で制限されます。</td></tr>
+<tr><th scope="row">縦位置 %</th><td>−30〜30%、0%</td><td>負の値で画像を上げます。ゲーム画面の通知表示では上方向への持ち上げとして適用します。</td></tr>
+<tr><th scope="row">下端 %</th><td>10〜100%。セットは通常100%、バスト用設定は78%</td><td>使う画像の下端を指定します。値を下げると下側を切り詰めます。個別PNGの新規登録は100%です。</td></tr>
+</tbody></table></div>
+<h3 id="overlay-library">画像ライブラリ</h3>
+<p>「画像ライブラリを管理…」を開きます。「個別PNG」の「PNGを追加…」で登録した画像は、元画面で固定画像として選ぶか、感情別に割り当てられます。「選択画像を登録解除」はその画像を使う割当も解除します。元のPNGファイルは残ります。</p>
+<figure><img src="images/overlay-library-png.png" alt="画像ライブラリ管理の個別PNGタブ"></figure>
+<p>「画像セット」では同梱セットを一覧で確認し、「ZIPを追加…」でセットを登録します。「選択セットを登録解除」は追加セットに使えます。同梱セットは登録解除できません。「編集中の感情別PNG割当からセット作成…」で、すでに割り当てた画像を新しいセットへまとめることもできます。</p>
+<figure><img src="images/overlay-library-sets.png" alt="画像ライブラリ管理の画像セットタブ"></figure>
+<p>画像はPNG形式で、透明背景にも対応します。1枚は1,600万画素以下、ZIPは64項目・展開後32 MB以下です。PNGをZIPにまとめて <code>manifest.json</code> をルートに置くと、自動で割当を読み込めます。manifestがなければ登録時にIDと各PNGを指定します。<code>neutral</code> は必須で、残り4種類は任意です。</p>
+<pre><code>{
+  "schema_version": 1,
+  "character_id": "my-character",
+  "set_id": "default",
+  "display_name": "自作の立ち絵",
+  "emotions": {
+    "neutral": "neutral.png",
+    "happy": "happy.png",
+    "worried": "worried.png",
+    "excited": "excited.png",
+    "relieved": "relieved.png"
+  }
+}</code></pre>
+<p>IDは英小文字・数字・ハイフン・下線で最大64文字、先頭は英小文字または数字にします。同じキャラクターIDとセットIDの組み合わせを重複登録できません。画像名はZIP内の相対パスで指定してください。任意の <code>layout</code> で <code>base_scale</code> に0.5〜2、<code>crop_mode</code> に <code>bust</code> を指定できます。</p>
+<h3 id="overlay-preview">プレビュー・保存</h3>
+<dl>
+<dt>プレビュー／テスト表示</dt><dd>編集中の表示を確認します。「テスト表示」はサンプル発話を模擬し、音声は再生しません。</dd>
+<dt>同期試聴</dt><dd>VOICEVOXでサンプルを読み上げ、音声と字幕の表示タイミングを試せます。VOICEVOXの選択と接続が必要です。</dd>
+<dt>詳細テスト</dt><dd>「割り込み」は緊急表示への切替、「テスト停止」は試聴・表示の中止、「失敗イベント」は再生失敗時の扱いを試します。「ゲーム上でテスト」はゲームウィンドウが必要で、編集中の設定を一時表示します。</dd>
+<dt>保存／キャンセル</dt><dd>「保存」で表示設定・画像選択・割当・補正を確定します。監視中のオーバーレイにも保存した設定が反映されます。「キャンセル」では編集中の値を破棄します。画像ライブラリの追加・登録解除・セット作成は即時反映され、元の設定画面をキャンセルしても残ります。</dd>
+</dl>
+<p>下の比較は設定画面のプレビューです。実ゲーム画面ではありません。</p>
+<div class="examples"><figure><img src="images/overlay-preview-default.png" alt="既定の文字サイズと背景不透明度での表示例"><figcaption>変更前。文字28 px、背景76%、立ち絵倍率100%。</figcaption></figure>
+<figure><img src="images/overlay-preview-adjusted.png" alt="文字と立ち絵を拡大し、背景を薄くした表示例"><figcaption>変更後。文字40 px、背景45%、立ち絵倍率145%。</figcaption></figure></div>
+</section>
+
+<section id="play"><h2>監視開始・停止とログ</h2>
+<p>ゲームを開き、ホームでゲームの検出状態を確認して「監視開始」を押します。出撃開始から記録したい場合は出撃前から監視してください。終了時は「停止」を押し、終了を確認してからアプリを閉じます。</p>
+<p>「ログ」タブで発言履歴を確認できます。出撃ごとの記録は展開先の <code>user-data/runs</code> が既定です。保存先を変更している場合は指定したフォルダーをご確認ください。</p>
+</section>
+
+<section id="maintenance"><h2>バックアップ・復元と更新</h2>
+<p>ホーム下の「バックアップ・復元」から、設定・立ち絵・出撃記憶をアプリフォルダーの外へ保存できます。個別の出撃ログも残すなら監視停止後に <code>runs</code> を別途コピーします。復元一覧を確認してから適用してください。APIキーはWindowsユーザーに紐付いて暗号化され、バックアップの対象外です。</p>
+<p>「アップデートを確認」→「オンラインで更新を確認」を選びます。変更内容を読んでダウンロードを承認し、署名検証後に適用を承認します。アプリは監視を停止して新版を適用し、診断に失敗した場合は旧版へ戻します。初回配布ZIPは別フォルダーに展開してください。</p>
+</section>
+
+<section id="help"><h2>困ったとき</h2>
+<dl><dt>VOICEVOXが未導入</dt><dd>公式のGUI版を導入するか、Windows標準音声を選びます。</dd><dt>接続できない・ポート使用中</dt><dd>VOICEVOX本体を開いて起動完了を待ち、実際のポートで接続確認します。別のアプリが使っているポートの場合は接続先を見直します。</dd><dt>ENGINEの起動失敗</dt><dd>展開先、実行ファイル、CPU/GPUの設定を確認します。GPU版は対応ドライバーを確認し、画面に表示された起動ログも参照してください。</dd><dt>Windows音声が鳴らない</dt><dd>音量と出力先を確認し、日本語音声が一覧に出ない場合はWindowsの言語・音声設定で追加します。</dd><dt>認識や更新がうまくいかない</dt><dd>ゲーム画面が見える状態で検出表示を確認します。更新情報の取得に失敗した場合は、少し時間を置いて再確認してください。</dd></dl>
+<dl><dt>通知や雑談が出ない</dt><dd>ホームの監視状態とミュートを確認します。通知は該当グループと追加通知の設定、雑談は生成方式とオン・オフを確認してください。発言設定の変更後は、保存して監視を開始し直します。発言間隔を満たしても、画面判定や優先度によって候補が見送られることがあります。音声出力だけを確かめるには「音声設定」の「試聴」を使います。</dd><dt>字幕・立ち絵が出ない</dt><dd>「ゲーム画面に表示する」をオンにして保存し、ゲームが検出されているか、文字・アイコン不透明度が0%になっていないか確認します。字幕は再生開始に同期するため、音声の再生失敗時は表示されないことがあります。立ち絵は「対象話者」と「実際に使用する画像」を確認してください。録画に映らない場合は「キャプチャに含める」と録画ソフトの取り込み方式を見直します。</dd></dl>
+</section>
+<section id="credits"><h2>利用条件・クレジット</h2>
+<p>本アプリは非公式のファン制作ツールです。画面の解像度・表示モード・遮蔽で認識結果が変わります。VOICEVOX音声を配信・投稿する場合は「クレジットをコピー」を利用し、使用した話者の規約に沿って表記してください。画像や第三者ライブラリの表記は<a href="https://github.com/mement-O/nightreign-companion-release#素材クレジット">配布README</a>と同梱文書にあります。 <a href="https://voicevox.hiroshiba.jp/term/">VOICEVOX利用規約</a> · <a href="https://github.com/VOICEVOX/voicevox_vvm/blob/main/TERMS.txt">話者別規約</a></p>
+</section>
+</main></body></html>

@@ -25,7 +25,7 @@ Windows 10/11 x64のシステムUCRTと、同梱のMicrosoft Visual C++ v14ラ�
 
 設定・画像・出撃記録は展開先の `user-data/` に保存されます。正常終了後はフォルダーごと移動できます。削除や引っ越しの前には「バックアップ・復元」でアプリの外に保存してください。APIキーはバックアップ対象外です。
 
-更新はアプリの「アップデートを確認」から行います。ダウンロードと適用の前にそれぞれ確認が表示されます。詳しい操作は [利用ガイド](利用ガイド.md) またはZIP同梱の「利用方法.txt」をご覧ください。
+更新はアプリの「アップデートを確認」から行います。ダウンロードと適用の前にそれぞれ確認が表示されます。詳しい操作は [スクリーンショット付き利用マニュアル](https://mement-o.github.io/nightreign-companion-release/)、[利用ガイド](利用ガイド.md) またはZIP同梱の「利用方法.txt」をご覧ください。
 
 ## バージョンと権利表記
 
@@ -49,4 +49,3 @@ Windows 10/11 x64のシステムUCRTと、同梱のMicrosoft Visual C++ v14ラ�
 | 春日部つむぎ | [二次創作活動の手引き](https://tsumugi-official.studio.site/rule) |
 | 冥鳴ひまり | [冥鳴ひまりの利用規約](https://meimeihimari.wixsite.com/himari/terms-of-use) |
 | No.7 | [No.7公式サイトの利用規約](https://voiceseven.com/#j0200) |
-
