@@ -2,7 +2,7 @@
 
 ## ダウンロード
 
-[**Windows x64版 v1.1.1 をダウンロード**](https://github.com/mement-O/nightreign-companion-release/releases/download/v1.1.1/NightreignCompanion-1.1.1-windows-x64.zip)
+[**Windows x64版 v1.1.2 をダウンロード**](https://github.com/mement-O/nightreign-companion-release/releases/download/v1.1.2/NightreignCompanion-1.1.2-windows-x64.zip)
 
 通常の利用には、上記のZIPファイルのみダウンロードしてください。
 
@@ -29,7 +29,7 @@ Windows 10/11 x64のシステムUCRTと、同梱のMicrosoft Visual C++ v14ラ�
 
 ## バージョンと権利表記
 
-現在の配布版は **1.1.1（Windows x64）** です。主要な変更とファイルの確認情報は各Releaseに記載します。
+現在の配布版は **1.1.2（Windows x64）** です。主要な変更とファイルの確認情報は各Releaseに記載します。
 
 本ツールはファン制作の非公式ツールです。ゲーム開発元・販売元やVOICEVOX開発元の公認・サポートを受けていません。ゲーム名、キャラクター名および第三者素材に関する権利は各権利者に帰属します。VOICEVOX本体は別途導入してください。VOICEVOX音声を利用する際は、利用したことが分かるクレジットを表記し、各音声ライブラリの規約に従ってください。 [VOICEVOX利用規約](https://voicevox.hiroshiba.jp/term/)
 
