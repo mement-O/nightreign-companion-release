@@ -8,6 +8,13 @@
 
 通常の利用には、上記のZIPファイルのみダウンロードしてください。
 
+> **初回起動時のWindows警告について**
+>
+> 本アプリはWindows向けのコード署名を行っていないため、SmartScreenの警告が表示される場合があります。公式配布元とReleaseのSHA-256を確認し、信頼できる場合は「詳細情報」→「実行」を選択してください。
+>
+> <img src="images/smartscreen-warning.png" width="300" alt="Windows Defender SmartScreenの警告画面">
+
+
 その他のReleaseアセットは自動更新・整合性確認用、またはGitHubが自動生成するファイルです。手動でダウンロードする必要はありません。
 
 ELDEN RING NIGHTREIGNのプレイ画面を監視し、ゲーム中の出来事に合わせて音声と字幕で反応する、非公式のWindows向けコンパニオンです。ゲーム本体は別途必要です。
