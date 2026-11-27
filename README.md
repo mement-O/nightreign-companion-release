@@ -1,5 +1,7 @@
 # NIGHTREIGN Companion
 
+[**利用ガイド（画面付きマニュアル）を開く**](https://mement-o.github.io/nightreign-companion-release/) ・ [素材クレジット](#素材クレジット)
+
 ## ダウンロード
 
 [**Windows x64版 v1.1.2 をダウンロード**](https://github.com/mement-O/nightreign-companion-release/releases/download/v1.1.2/NightreignCompanion-1.1.2-windows-x64.zip)
@@ -43,7 +45,7 @@ Windows 10/11 x64のシステムUCRTと、同梱のMicrosoft Visual C++ v14ラ�
 | --- | --- |
 | ずんだもん | [東北ずん子・ずんだもんプロジェクトの利用ガイドライン](https://zunko.jp/guideline.html) |
 | 四国めたん | [東北ずん子・ずんだもんプロジェクトの利用ガイドライン](https://zunko.jp/guideline.html) |
-
+| 東北きりたん | [東北ずん子・ずんだもんプロジェクトの利用ガイドライン](https://zunko.jp/guideline.html) |
 | 中国うさぎ | [東北ずん子・ずんだもんプロジェクトの利用ガイドライン](https://zunko.jp/guideline.html) |
 | WhiteCUL | [WhiteCUL利用規約](https://www.whitecul.com/guideline) |
 | 春日部つむぎ | [二次創作活動の手引き](https://tsumugi-official.studio.site/rule) |
